@@ -19,7 +19,7 @@ module.exports = () => {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Client Server',
+            title: 'JATE',
 			template: './index.html',
 		}),
         new InjectManifest({
@@ -36,36 +36,32 @@ module.exports = () => {
             publicPath: './',
             icons: [
               {
-                src: path.resolve('images/logo.png'),
+                src: path.resolve('assets/images/logo.png'),
                 sizes: [96, 128, 192, 256, 384, 512],
-                destination: path.join('images', 'icons'),
+                destination: path.join('assets', 'icons'),
               },
             ],
           }),
     ],
 
     module: {
-      rules: [
-        {
-            test: /\.css$/,
-            use: ['style-loader', 'css-loader'],
-        },
-        {
-            test: /\.(png|svg|jpg|jpeg|gif)$/i,
-            type: 'asset/resource',
-        },
-        {
-            test: /\.m?js$/,
-            exclude: /(node_modules|bower_components)/,
-            use: {
-                loader: 'babel-loader',
-                options: {
-                presets: ['@babel/preset-env'],
+        rules: [
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
+            },
+            {
+                test: /\.m?js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env'],
+                        plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime'],
+                    },
                 },
             },
-        }
-        
-      ],
+        ],
     },
   };
 };
