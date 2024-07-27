@@ -18,11 +18,52 @@ module.exports = () => {
       path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
-      
+        new HtmlWebpackPlugin({
+            title: 'Client Server',
+			template: './index.html',
+		}),
+        new InjectManifest({
+            swSrc: './src/sw.js',
+            swDest: 'service-worker.js',
+        }),
+        new WebpackPwaManifest({
+            name: 'TextEditor',
+            short_name: 'TextEditor',
+            description: 'Create notes or code snippets',
+            background_color: '#7eb4e2',
+            theme_color: '#7eb4e2',
+            start_url: './',
+            publicPath: './',
+            icons: [
+              {
+                src: path.resolve('images/logo.png'),
+                sizes: [96, 128, 192, 256, 384, 512],
+                destination: path.join('images', 'icons'),
+              },
+            ],
+          }),
     ],
 
     module: {
       rules: [
+        {
+            test: /\.css$/,
+            use: ['style-loader', 'css-loader'],
+        },
+        {
+            test: /\.(png|svg|jpg|jpeg|gif)$/i,
+            type: 'asset/resource',
+        },
+        {
+            test: /\.m?js$/,
+            exclude: /(node_modules|bower_components)/,
+            use: {
+                loader: 'babel-loader',
+                options: {
+                presets: ['@babel/preset-env'],
+                },
+            },
+        }
         
       ],
     },
