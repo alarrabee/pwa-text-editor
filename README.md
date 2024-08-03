@@ -53,4 +53,4 @@ THEN I should have proper build scripts for a webpack application
 ![image](https://github.com/user-attachments/assets/b25dc5a7-93fa-4172-8c1b-6483cc3f24fa)
 
 ## Challenges
-Unable to start a development server due to an error stating application was compiled with errors. Was not able to fix this error and application was not able to be successfully deployed.
+Unable to start a development server due to an error that could not be resolved. It looks like the development build completes successfully but I get a warning "InjectManifest has been called multiple times" occurs during the development process. The instructor reviewed my code but was also unable to find a solution. I am able to access and successfully install the application on PORT 3001 but was not successful in getting Render to build and deploy it.
